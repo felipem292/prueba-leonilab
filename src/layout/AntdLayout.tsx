@@ -1,22 +1,21 @@
 import { Layout } from "antd";
+import MainPage from "../pages/MainPage";
+import AboutPage from "../pages/AboutPage";
+import { SenatorContext } from "../context";
+import { useContext, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Member } from "../interfaces/senateInterfaces";
-import MyfilterField from "../components/MyfilterField";
-import { MyTable } from "../components/MyTable";
-import AboutPage from "../pages/AboutPage";
-import { useContext, useEffect, useState } from "react";
-import { SenatorContext } from "../context";
+import { MyLoading } from "../components/MyLoading";
 const { Header, Content, Footer } = Layout;
-// interface Props {
-//   children: React.ReactNode;
-// }
 
 export const AntdLayout = () => {
   const { isLoading, senators } = useContext(SenatorContext);
   const [filter, setFilter] = useState("");
+  const [gender, setGender] = useState("");
+  const [party, setParty] = useState("");
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return <MyLoading />;
   }
 
   const crearLista = () => {
@@ -27,7 +26,8 @@ export const AntdLayout = () => {
           senator?.last_name?.includes(filter) ||
           senator?.gender?.includes(filter) ||
           senator?.id?.includes(filter) ||
-          senator?.party?.includes(filter)
+          senator?.party?.includes(filter) ||
+          senator?.gender?.includes(gender)
         );
       }
       return senator;
@@ -45,16 +45,24 @@ export const AntdLayout = () => {
         <h1 style={{ color: "#fff" }}>LeonilabApp</h1>
       </Header>
       <Content style={{ padding: "0 50px" }}>
-        <div className="site-layout-content">
+        <div
+          className="site-layout-content"
+          style={{ maxHeight: "100%", overflow: "auto" }}
+        >
           <Routes>
             <Route path={"/about/:id"} element={<AboutPage />} />
             <Route
               path="/"
               element={
-                <>
-                  <MyfilterField setFilter={setFilter} />
-                  <MyTable loading={isLoading} data={filterdData} />
-                </>
+                <MainPage
+                  setFilter={setFilter}
+                  loading={isLoading}
+                  data={filterdData}
+                  gender={gender}
+                  setGender={setGender}
+                  party={party}
+                  setParty={setParty}
+                />
               }
             />
           </Routes>

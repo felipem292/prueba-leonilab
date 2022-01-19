@@ -38,12 +38,10 @@ const AboutPage = () => {
         <Descriptions.Item label="Facebook">
           {candidate[0]?.facebook_account}
         </Descriptions.Item>
-        <Descriptions.Item label="Youtube" span={2}>
+        <Descriptions.Item label="Youtube">
           {candidate[0]?.youtube_account}
         </Descriptions.Item>
-        <Descriptions.Item label="Url" span={3}>
-          {candidate[0]?.url}
-        </Descriptions.Item>
+        <Descriptions.Item label="Url">{candidate[0]?.url}</Descriptions.Item>
         <Descriptions.Item label="Votos">
           {candidate[0]?.total_votes}
         </Descriptions.Item>
