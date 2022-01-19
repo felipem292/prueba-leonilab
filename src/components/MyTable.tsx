@@ -1,37 +1,69 @@
-import { Table } from "antd";
-
-export const MyTable = () => {
-  const dataSource = [
-    {
-      key: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street",
-    },
-    {
-      key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-  ];
-
+import { Member } from "../interfaces/senateInterfaces";
+interface MylistProps {
+  loading: boolean;
+  data: Member[];
+}
+export const MyTable = ({ loading, data }: MylistProps) => {
   const columns = [
     {
-      title: "Name",
+      title: "Id",
+      dataIndex: "id",
+      key: "id",
+    },
+    {
+      title: "Nombre",
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
+      title: "Partido",
+      dataIndex: "party",
+      key: "party",
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
+      title: "Genero",
+      dataIndex: "gender",
+      key: "gender",
     },
   ];
-  return <Table dataSource={dataSource} columns={columns} />;
+  return (
+    <div className="ant-table">
+      <div className="ant-table-container">
+        <div className="ant-table-content">
+          <table style={{ tableLayout: "auto" }}>
+            <colgroup></colgroup>
+            <thead className="ant-table-thead">
+              <tr>
+                {columns.map((col) => (
+                  <th key={col.key} className="ant-table-cell">
+                    {col.title}{" "}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="ant-table-tbody">
+              {data.map((row) => (
+                <tr
+                  key={row.id}
+                  data-row-key="1"
+                  className="ant-table-row ant-table-row-level-0"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => console.log(row.last_name)}
+                >
+                  <td className="ant-table-cell">{row?.id} </td>
+                  <td className="ant-table-cell">
+                    {`${row?.first_name} ${row?.last_name} ${
+                      row?.middle_name || ""
+                    }`}
+                  </td>
+                  <td className="ant-table-cell">{row?.party} </td>
+                  <td className="ant-table-cell">{row?.gender} </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
 };
