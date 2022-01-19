@@ -2,11 +2,17 @@ import { Descriptions, Badge } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
+import { SenatorContext } from "../context";
+import { useContext } from "react";
+import { Member } from "../interfaces/senateInterfaces";
 
 // import {useParams} from ‘react-router-dom’;
 const AboutPage = () => {
+  const { isLoading, senators } = useContext(SenatorContext);
   const { id } = useParams();
   const navigate = useNavigate();
+  const candidate = senators?.filter((senator: Member) => senator.id === id);
+  // console.log(candidate);
   return (
     <>
       <Button
@@ -16,34 +22,39 @@ const AboutPage = () => {
       >
         Ver Senadores
       </Button>
-      <Descriptions title="Informacion del senador" bordered>
-        <Descriptions.Item label="Nombre">Nombre senador</Descriptions.Item>
-        <Descriptions.Item label="Partido">Partido</Descriptions.Item>
-        <Descriptions.Item label="Genero">Genero</Descriptions.Item>
+      <Descriptions
+        title={`Información del senador ${candidate[0]?.first_name} ${candidate[0]?.last_name}`}
+        bordered
+      >
+        <Descriptions.Item label="Nombre">
+          {`${candidate[0]?.first_name} ${candidate[0]?.last_name}`}
+        </Descriptions.Item>
+        <Descriptions.Item label="Partido">
+          {candidate[0]?.party}
+        </Descriptions.Item>
+        <Descriptions.Item label="Genero">
+          {candidate[0]?.gender}
+        </Descriptions.Item>
         <Descriptions.Item label="Facebook">
-          Cuenta de facebook
+          {candidate[0]?.facebook_account}
         </Descriptions.Item>
-        <Descriptions.Item label="Usage Time" span={2}>
-          2019-04-24 18:00:00
+        <Descriptions.Item label="Youtube" span={2}>
+          {candidate[0]?.youtube_account}
         </Descriptions.Item>
-        <Descriptions.Item label="Status" span={3}>
-          <Badge status="processing" text="Running" />
+        <Descriptions.Item label="Url" span={3}>
+          {candidate[0]?.url}
         </Descriptions.Item>
-        <Descriptions.Item label="Negotiated Amount">$80.00</Descriptions.Item>
-        <Descriptions.Item label="Discount">$20.00</Descriptions.Item>
-        <Descriptions.Item label="Official Receipts">$60.00</Descriptions.Item>
-        <Descriptions.Item label="Config Info">
-          Data disk type: MongoDB
-          <br />
-          Database version: 3.4
-          <br />
-          Package: dds.mongo.mid
-          <br />
-          Storage space: 10 GB
-          <br />
-          Replication factor: 3
-          <br />
-          Region: East China 1<br />
+        <Descriptions.Item label="Votos">
+          {candidate[0]?.total_votes}
+        </Descriptions.Item>
+        <Descriptions.Item label="Votos Perdidos">
+          {candidate[0]?.missed_votes}{" "}
+        </Descriptions.Item>
+        <Descriptions.Item label="Estado">
+          {candidate[0]?.state}
+        </Descriptions.Item>
+        <Descriptions.Item label="Perfil">
+          {candidate[0]?.rss_url}
         </Descriptions.Item>
       </Descriptions>
     </>
