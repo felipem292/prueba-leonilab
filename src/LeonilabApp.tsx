@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { AntdLayout } from "./layout/AntdLayout";
 import { Member } from "./interfaces/senateInterfaces";
 import { BrowserRouter } from "react-router-dom";
+import SenatorProvider from "./context/SenatorProvider";
 
 export const LeonilabApp = () => {
   const [data, setData] = useState([]);
@@ -43,16 +44,22 @@ export const LeonilabApp = () => {
   let filterdData = [];
   filterdData = crearLista();
   return (
-    <BrowserRouter>
-      <AntdLayout loading={loading} data={filterdData} setFilter={setFilter} />
-      {/* {!loading && (
+    <SenatorProvider>
+      <BrowserRouter>
+        <AntdLayout
+          loading={loading}
+          data={filterdData}
+          setFilter={setFilter}
+        />
+        {/* {!loading && (
           <div style={{ maxHeight: "100%", overflow: "auto" }}>
             <h2></h2>
             <MyfilterField setFilter={setFilter} />
             <MyTable loading={loading} data={filterdData} />
           </div>
         )} */}
-      {/* </AntdLayout> */}
-    </BrowserRouter>
+        {/* </AntdLayout> */}
+      </BrowserRouter>
+    </SenatorProvider>
   );
 };
