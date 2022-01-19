@@ -1,9 +1,11 @@
 import { Member } from "../interfaces/senateInterfaces";
+import { useNavigate } from "react-router-dom";
 interface MylistProps {
   loading: boolean;
   data: Member[];
 }
 export const MyTable = ({ loading, data }: MylistProps) => {
+  const navigate = useNavigate();
   const columns = [
     {
       title: "Id",
@@ -36,7 +38,7 @@ export const MyTable = ({ loading, data }: MylistProps) => {
               <tr>
                 {columns.map((col) => (
                   <th key={col.key} className="ant-table-cell">
-                    {col.title}{" "}
+                    {col.title}
                   </th>
                 ))}
               </tr>
@@ -48,7 +50,7 @@ export const MyTable = ({ loading, data }: MylistProps) => {
                   data-row-key="1"
                   className="ant-table-row ant-table-row-level-0"
                   style={{ cursor: "pointer" }}
-                  onClick={() => console.log(row.last_name)}
+                  onClick={() => navigate(`/about/${row.id}`)}
                 >
                   <td className="ant-table-cell">{row?.id} </td>
                   <td className="ant-table-cell">

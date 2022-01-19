@@ -1,7 +1,4 @@
 import { useEffect, useState } from "react";
-import MyfilterField from "./components/MyfilterField";
-import { MyList } from "./components/MyList";
-import { MyTable } from "./components/MyTable";
 import { AntdLayout } from "./layout/AntdLayout";
 import { Member } from "./interfaces/senateInterfaces";
 import { BrowserRouter } from "react-router-dom";

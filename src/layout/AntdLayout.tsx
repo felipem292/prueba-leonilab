@@ -1,10 +1,9 @@
 import { Layout } from "antd";
-import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { LeonilabApp } from "../LeonilabApp";
 import { Member } from "../interfaces/senateInterfaces";
 import MyfilterField from "../components/MyfilterField";
 import { MyTable } from "../components/MyTable";
+import AboutPage from "../pages/AboutPage";
 const { Header, Content, Footer } = Layout;
 // interface Props {
 //   children: React.ReactNode;
@@ -36,7 +35,7 @@ export const AntdLayout = ({ loading, data, setFilter }: Props) => {
       <Content style={{ padding: "0 50px" }}>
         <div className="site-layout-content">
           <Routes>
-            <Route path={"/about:id"} element={<h2>asdasdasdasd</h2>} />
+            <Route path={"/about/:id"} element={<AboutPage />} />
             <Route
               path="/"
               element={
