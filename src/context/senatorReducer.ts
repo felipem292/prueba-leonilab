@@ -8,7 +8,7 @@ export const senatorReducer = (
 ): SenatorState => {
   switch (action.type) {
     case "SET_SENATOR":
-      return { ...state, senators: action.payload };
+      return { ...state, isLoading: false, senators: action.payload };
 
     default:
       return state;

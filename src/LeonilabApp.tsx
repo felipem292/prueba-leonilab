@@ -46,11 +46,7 @@ export const LeonilabApp = () => {
   return (
     <SenatorProvider>
       <BrowserRouter>
-        <AntdLayout
-          loading={loading}
-          data={filterdData}
-          setFilter={setFilter}
-        />
+        <AntdLayout />
         {/* {!loading && (
           <div style={{ maxHeight: "100%", overflow: "auto" }}>
             <h2></h2>

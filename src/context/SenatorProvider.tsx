@@ -1,10 +1,10 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { Member } from "../interfaces/senateInterfaces";
 import { SenatorContext } from "./SenatorContext";
 import { senatorReducer } from "./senatorReducer";
 export interface SenatorState {
   isLoading: boolean;
-  senators?: Member[];
+  senators: Member[];
 }
 const INITIAL_STATE: SenatorState = {
   isLoading: true,
@@ -13,8 +13,25 @@ const INITIAL_STATE: SenatorState = {
 interface Props {
   children: JSX.Element | JSX.Element[];
 }
-const [state, dispatch] = useReducer(senatorReducer, INITIAL_STATE);
+
 const SenatorProvider = ({ children }: Props) => {
+  const [state, dispatch] = useReducer(senatorReducer, INITIAL_STATE);
+  useEffect(() => {
+    fetch("https://api.propublica.org/congress/v1/116/senate/members.json", {
+      headers: {
+        "x-api-key": "PHk17xIOVlB9j8m2pqiSswTYh9ZNUno7m38F77lk",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: "SET_SENATOR",
+          payload: json.results[0].members,
+        });
+        // console.log(json?.results[0]?.members);
+        // setData(json?.results[0]?.members);
+      });
+  }, []);
   return (
     <SenatorContext.Provider
       value={{
