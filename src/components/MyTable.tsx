@@ -29,7 +29,7 @@ export const MyTable = ({ loading, data }: MylistProps) => {
     },
   ];
   return (
-    <div className="ant-table" style={{ maxHeight: "90%", overflow: "auto" }}>
+    <div className="ant-table" style={{ maxHeight: "80%", overflow: "auto" }}>
       <div className="ant-table-container">
         <div className="ant-table-content">
           <table style={{ tableLayout: "auto" }}>

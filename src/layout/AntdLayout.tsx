@@ -6,6 +6,8 @@ import { useContext, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Member } from "../interfaces/senateInterfaces";
 import { MyLoading } from "../components/MyLoading";
+import usePagination from "../hooks/usePagination";
+// import usePagination from "../hooks/usePagination";
 const { Header, Content, Footer } = Layout;
 
 export const AntdLayout = () => {
@@ -17,7 +19,6 @@ export const AntdLayout = () => {
   if (isLoading) {
     return <MyLoading />;
   }
-
   const crearLista = () => {
     const nuevaLista = senators
       ?.filter((senator: Member) => {
@@ -47,8 +48,9 @@ export const AntdLayout = () => {
 
     return nuevaLista;
   };
-  let filterdData = [];
+  let filterdData: any[] = [];
   filterdData = !isLoading && crearLista();
+
   return (
     <Layout className="layout">
       <Header style={{ textAlign: "center", color: "#fff" }}>
