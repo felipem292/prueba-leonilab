@@ -31,9 +31,17 @@ const MainPage = ({
   }
   return (
     <>
-      <Row justify="space-between">
+      <Row justify="start">
         <MyfilterField setFilter={setFilter} />
 
+        <Checkbox
+          onChange={onChange}
+          style={{ marginLeft: "1rem", marginTop: "0.2rem" }}
+        >
+          {checkElement ? "Ocultar filtros" : "Otros filtros"}
+        </Checkbox>
+      </Row>
+      <Row justify="start">
         {checkElement && (
           <FormFilter
             gender={gender}
@@ -42,10 +50,6 @@ const MainPage = ({
             setParty={setParty}
           />
         )}
-
-        <Checkbox onChange={onChange} style={{ marginTop: "0.2rem" }}>
-          {checkElement ? "Ocultar filtros" : "Otros filtros"}
-        </Checkbox>
       </Row>
 
       <MyTable loading={loading} data={data} />

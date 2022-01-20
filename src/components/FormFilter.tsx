@@ -20,7 +20,7 @@ export const FormFilter = ({
       <Form.Item>
         <Select
           value={gender}
-          style={{ width: "auto", minWidth: 120 }}
+          style={{ width: "auto", minWidth: 120, marginRight: "1rem" }}
           onChange={(value) => setGender(value)}
         >
           <Option value="todos">Todos los generos</Option>
@@ -31,7 +31,7 @@ export const FormFilter = ({
       <Form.Item>
         <Select
           value={party}
-          style={{ width: "auto", minWidth: 120 }}
+          style={{ width: "auto", minWidth: 120, marginRight: "1rem" }}
           onChange={(value) => setParty(value)}
         >
           <Option value="todos">Todos los partidos</Option>

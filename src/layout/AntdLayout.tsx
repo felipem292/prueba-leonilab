@@ -19,7 +19,6 @@ export const AntdLayout = () => {
   }
 
   const crearLista = () => {
-    console.log(gender, party);
     const nuevaLista = senators
       ?.filter((senator: Member) => {
         if (filter !== "") {
