@@ -19,19 +19,32 @@ export const AntdLayout = () => {
   }
 
   const crearLista = () => {
-    const nuevaLista = senators?.filter((senator: Member) => {
-      if (filter !== "") {
-        return (
-          senator?.first_name.includes(filter)! ||
-          senator?.last_name?.includes(filter) ||
-          senator?.gender?.includes(filter) ||
-          senator?.id?.includes(filter) ||
-          senator?.party?.includes(filter) ||
-          senator?.gender?.includes(gender)
-        );
-      }
-      return senator;
-    });
+    console.log(gender, party);
+    const nuevaLista = senators
+      ?.filter((senator: Member) => {
+        if (filter !== "") {
+          return (
+            senator?.first_name.includes(filter)! ||
+            senator?.last_name?.includes(filter) ||
+            senator?.gender?.includes(filter) ||
+            senator?.id?.includes(filter) ||
+            senator?.party?.includes(filter)
+          );
+        }
+        return senator;
+      })
+      .filter((senator: Member) => {
+        if (gender !== "todos" && gender.length) {
+          return senator.gender === gender;
+        }
+        return senator;
+      })
+      .filter((senator: Member) => {
+        if (party !== "todos" && party.length) {
+          return senator.party === party;
+        }
+        return senator;
+      });
 
     return nuevaLista;
   };
