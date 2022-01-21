@@ -1,5 +1,4 @@
-import { Button, Col, Pagination, Row } from "antd";
-import MyCollapse from "../components/MyCollapse";
+import { Pagination, Row } from "antd";
 import MyfilterField from "../components/MyfilterField";
 import { MyTable } from "../components/MyTable";
 import { Member } from "../interfaces/senateInterfaces";
@@ -26,14 +25,13 @@ const MainPage = ({
   setParty,
 }: MainPageProps) => {
   const [checkElement, setCheckElement] = useState(false);
-  const PER_PAGE = 10;
+  const PER_PAGE = Math.ceil(data.length / 7);
   let [page, setPage] = useState(1);
   const _DATA = usePagination(data, PER_PAGE);
   function onChange(e: any) {
     // console.log(`checked = ${e.target.checked}`);
     setCheckElement(e.target.checked);
   }
-  //paginacion
 
   const count = Math.ceil(data.length / PER_PAGE) * 10;
 
@@ -41,7 +39,7 @@ const MainPage = ({
     setPage(page);
     _DATA.jump(page);
   };
-
+  console.log(_DATA.currentData());
   return (
     <>
       <Row justify="start">
