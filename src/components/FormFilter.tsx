@@ -13,7 +13,6 @@ export const FormFilter = ({
   party,
   setParty,
 }: FormFilterProps) => {
-  const [form] = Form.useForm();
   const { Option } = Select;
   return (
     <>

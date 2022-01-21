@@ -42,29 +42,27 @@ const MainPage = ({
   return (
     <>
       {data.length > 0 && (
-        <>
-          <Row justify="start">
-            <MyfilterField setFilter={setFilter} />
+        <Row justify="start">
+          <MyfilterField setFilter={setFilter} />
 
-            <Checkbox
-              onChange={onChange}
-              style={{ marginLeft: "1rem", marginTop: "0.2rem" }}
-            >
-              {checkElement ? "Ocultar filtros" : "Otros filtros"}
-            </Checkbox>
-          </Row>
-          <Row justify="start">
-            {checkElement && (
-              <FormFilter
-                gender={gender}
-                setGender={setGender}
-                party={party}
-                setParty={setParty}
-              />
-            )}
-          </Row>
-        </>
+          <Checkbox
+            onChange={onChange}
+            style={{ marginLeft: "1rem", marginTop: "0.2rem" }}
+          >
+            {checkElement ? "Ocultar filtros" : "Otros filtros"}
+          </Checkbox>
+        </Row>
       )}
+      <Row justify="start">
+        {checkElement && (
+          <FormFilter
+            gender={gender}
+            setGender={setGender}
+            party={party}
+            setParty={setParty}
+          />
+        )}
+      </Row>
 
       <MyTable loading={loading} data={_DATA.currentData()} />
       {data.length > 0 && (

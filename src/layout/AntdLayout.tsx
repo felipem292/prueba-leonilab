@@ -6,7 +6,6 @@ import { useContext, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Member } from "../interfaces/senateInterfaces";
 import { MyLoading } from "../components/MyLoading";
-import usePagination from "../hooks/usePagination";
 // import usePagination from "../hooks/usePagination";
 const { Header, Content, Footer } = Layout;
 

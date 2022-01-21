@@ -1,4 +1,4 @@
-import { Descriptions, Badge } from "antd";
+import { Descriptions } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
@@ -8,7 +8,7 @@ import { Member } from "../interfaces/senateInterfaces";
 
 // import {useParams} from ‘react-router-dom’;
 const AboutPage = () => {
-  const { isLoading, senators } = useContext(SenatorContext);
+  const { senators } = useContext(SenatorContext);
   const { id } = useParams();
   const navigate = useNavigate();
   const candidate = senators?.filter((senator: Member) => senator.id === id);
