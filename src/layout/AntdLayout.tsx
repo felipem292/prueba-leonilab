@@ -1,4 +1,4 @@
-import { Layout } from "antd";
+import { Alert, Layout } from "antd";
 import MainPage from "../pages/MainPage";
 import AboutPage from "../pages/AboutPage";
 import { SenatorContext } from "../context";
@@ -11,7 +11,7 @@ import usePagination from "../hooks/usePagination";
 const { Header, Content, Footer } = Layout;
 
 export const AntdLayout = () => {
-  const { isLoading, senators } = useContext(SenatorContext);
+  const { isLoading, hasError, senators } = useContext(SenatorContext);
   const [filter, setFilter] = useState("");
   const [gender, setGender] = useState("");
   const [party, setParty] = useState("");
@@ -19,6 +19,7 @@ export const AntdLayout = () => {
   if (isLoading) {
     return <MyLoading />;
   }
+
   const crearLista = () => {
     const nuevaLista = senators
       ?.filter((senator: Member) => {
@@ -63,6 +64,14 @@ export const AntdLayout = () => {
           className="site-layout-content"
           style={{ maxHeight: "100%", overflow: "auto" }}
         >
+          {hasError && (
+            <Alert
+              message="Error"
+              description="Algo salió mal, por favor intenta de nuevo"
+              type="error"
+              closable
+            />
+          )}
           <Routes>
             <Route path={"/about/:id"} element={<AboutPage />} />
             <Route

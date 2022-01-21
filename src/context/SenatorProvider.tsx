@@ -4,10 +4,12 @@ import { SenatorContext } from "./SenatorContext";
 import { senatorReducer } from "./senatorReducer";
 export interface SenatorState {
   isLoading: boolean;
+  hasError: boolean;
   senators: Member[];
 }
 const INITIAL_STATE: SenatorState = {
   isLoading: true,
+  hasError: false,
   senators: [],
 };
 interface Props {
@@ -30,6 +32,12 @@ const SenatorProvider = ({ children }: Props) => {
         });
         // console.log(json?.results[0]?.members);
         // setData(json?.results[0]?.members);
+      })
+      .catch(() => {
+        dispatch({
+          type: "SET_ERROR",
+          payload: [],
+        });
       });
   }, []);
   return (

@@ -39,37 +39,42 @@ const MainPage = ({
     setPage(page);
     _DATA.jump(page);
   };
-  console.log(_DATA.currentData());
   return (
     <>
-      <Row justify="start">
-        <MyfilterField setFilter={setFilter} />
+      {data.length > 0 && (
+        <>
+          <Row justify="start">
+            <MyfilterField setFilter={setFilter} />
 
-        <Checkbox
-          onChange={onChange}
-          style={{ marginLeft: "1rem", marginTop: "0.2rem" }}
-        >
-          {checkElement ? "Ocultar filtros" : "Otros filtros"}
-        </Checkbox>
-      </Row>
-      <Row justify="start">
-        {checkElement && (
-          <FormFilter
-            gender={gender}
-            setGender={setGender}
-            party={party}
-            setParty={setParty}
-          />
-        )}
-      </Row>
+            <Checkbox
+              onChange={onChange}
+              style={{ marginLeft: "1rem", marginTop: "0.2rem" }}
+            >
+              {checkElement ? "Ocultar filtros" : "Otros filtros"}
+            </Checkbox>
+          </Row>
+          <Row justify="start">
+            {checkElement && (
+              <FormFilter
+                gender={gender}
+                setGender={setGender}
+                party={party}
+                setParty={setParty}
+              />
+            )}
+          </Row>
+        </>
+      )}
 
       <MyTable loading={loading} data={_DATA.currentData()} />
-      <Pagination
-        defaultCurrent={1}
-        total={count}
-        current={page}
-        onChange={(e) => handleChange(e)}
-      />
+      {data.length > 0 && (
+        <Pagination
+          defaultCurrent={1}
+          total={count}
+          current={page}
+          onChange={(e) => handleChange(e)}
+        />
+      )}
     </>
   );
 };

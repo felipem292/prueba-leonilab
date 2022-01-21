@@ -28,6 +28,7 @@ export const MyTable = ({ loading, data }: MylistProps) => {
       key: "gender",
     },
   ];
+
   return (
     <div className="ant-table" style={{ maxHeight: "80%", overflow: "auto" }}>
       <div className="ant-table-container">
@@ -44,13 +45,23 @@ export const MyTable = ({ loading, data }: MylistProps) => {
               </tr>
             </thead>
             <tbody className="ant-table-tbody">
-              {data.map((row) => (
+              {data.length === 0 && (
+                <tr
+                  data-row-key="1"
+                  className="ant-table-row ant-table-row-level-0"
+                >
+                  <td colSpan={columns?.length} className="ant-table-cell">
+                    Sin datos para mostar, intentalo mas tarde...
+                  </td>
+                </tr>
+              )}
+              {data?.map((row) => (
                 <tr
                   key={row.id}
                   data-row-key="1"
                   className="ant-table-row ant-table-row-level-0"
                   style={{ cursor: "pointer" }}
-                  onClick={() => navigate(`/about/${row.id}`)}
+                  onClick={() => navigate(`/about/${row?.id}`)}
                 >
                   <td className="ant-table-cell">{row?.id} </td>
                   <td className="ant-table-cell">

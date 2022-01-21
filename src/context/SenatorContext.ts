@@ -3,6 +3,7 @@ import { Member } from "../interfaces/senateInterfaces";
 
 export interface SenatorContextProps {
   isLoading: boolean;
+  hasError: boolean;
   senators: Member[];
 }
 
